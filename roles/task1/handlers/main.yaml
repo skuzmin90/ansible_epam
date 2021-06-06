@@ -2,7 +2,7 @@
 - name: reload firewall
   service: name=firewalld state=reloaded
 
-- name: starting grub2-mkconfig
+- name: reconfigure grub
   command: grub2-mkconfig
 
 - name: reload httpd.service
