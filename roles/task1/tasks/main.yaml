@@ -1,0 +1,53 @@
+---
+- name: Install, configure, and start Apache
+  block:
+  - name: Install Apache Web-server
+    yum: name=httpd state=latest
+
+  - name: Enable httpd.service
+    service: name=httpd state=started enabled=yes
+
+  - name: Create an index.html
+    template: src=index.j2.html dest=/var/www/html/index.html owner=root group=root mode=0644 
+    notify:
+      - reload httpd.service
+  
+  - name: Configure Firewall
+    firewalld: port=80/tcp  permanent=yes state=enabled
+    notify:
+      - reload firewall
+  tags:
+    - install_apache
+
+- name: Delete and disabled Apache Web-server
+  block:
+  - name: Remove Apache from a Web-server
+    yum: name=httpd state=absent
+
+  - name: Deleting a Apache Web-server package
+    package: name=httpd state=absent
+
+  - name: Deleting a file
+    file: path=/var/www/html/index.html state=absent
+
+  - name: Firewalld
+    firewalld:  port=80/tcp state=disabled permanent=yes
+    notify:
+      - reload firewall
+  tags:
+    - delete_apache
+
+- name: Configure grub with new params
+  block:
+    - name: Search line
+      lineinfile: path=/etc/default/grub state=present regexp='^GRUB_CMDLINE_LINUX=".*(net.ifnames=0 biosdevname=0)+' 
+      register: grub_line
+    
+    - name: 
+      debug: var=grub_line
+
+    - lineinfile: path=/etc/default/grub state=present backrefs=yes regexp='(GRUB_CMDLINE_LINUX=["]?.*quiet{1})' line='\1 net.ifnames=0 biosdevname=0"'
+      notify:
+        - reconfigure grub
+  tags:
+    - configure_grub
