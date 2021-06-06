@@ -38,16 +38,8 @@
     - delete_apache
 
 - name: Configure grub with new params
-  block:
-    - name: Search line
-      lineinfile: path=/etc/default/grub state=present regexp='^GRUB_CMDLINE_LINUX=".*(net.ifnames=0 biosdevname=0)+' 
-      register: grub_line
-    
-    - name: 
-      debug: var=grub_line
-
-    - lineinfile: path=/etc/default/grub state=present backrefs=yes regexp='(GRUB_CMDLINE_LINUX=["]?.*quiet{1})' line='\1 net.ifnames=0 biosdevname=0"'
-      notify:
-        - reconfigure grub
+  lineinfile: path=/etc/default/grub state=present backrefs=yes regexp='(GRUB_CMDLINE_LINUX=["]?.*quiet{1})' line='\1 net.ifnames=0 biosdevname=0"'
+  notify:
+    - reconfigure grub
   tags:
     - configure_grub
