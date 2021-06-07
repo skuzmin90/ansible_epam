@@ -1,10 +1,6 @@
 ---
-- name: Creating new users
+- name: Create new users
   user:
-    name: "{{ item.name }}"
+    name: {{ item.name }}
     state: present
-    password: "{{ item.password }}"
-    comment: "{{ item.comment }}"
-    create_home: yes
-    home: "{{ item.home }}"
-  loop: "{{ users }}"
+  with_items: {{ users }}
