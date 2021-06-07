@@ -1,5 +1,5 @@
 ---
 - name: Creating users
-  user: name="{{ item.name }}" state=present password="{{ item.passwords }}" comment="{{ item.comment }}" home="{{ item.home }}"
-  with_items: "{{ users|passwords }}"
+  user: name="{{ item.name }}" state=present password="{{ item.password }}" comment="{{ item.comment }}" home="{{ item.home }}"
+  with_items: "{{ users }}"
 
