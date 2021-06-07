@@ -1,5 +1,5 @@
 ---
-- name: Create new users
+- name:
   user:
     name: "{{ users.user1 }}"
     state: present
