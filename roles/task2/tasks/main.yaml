@@ -4,7 +4,7 @@
     name: "{{ users.user1 }}"
     state: present
     create_home: yes
-    password: "{{ password1 | password_hash('sha512') }}"
+    password: "{{ passwords.password1 | password_hash('sha512') }}"
     comment: "{{ users.user1 }}@example.com"
     home: "/home/{{ users.user1 }}"
 
@@ -13,7 +13,7 @@
     name: "{{ users.user2 }}"
     state: present
     create_home: yes
-    password: "{{ password2 | password_hash('sha512') }}"
+    password: "{{ passwords.password2 | password_hash('sha512') }}"
     comment: "{{ users.user2 }}@example.com"
     home: "/home/{{ users.user2 }}"
 
@@ -22,6 +22,6 @@
     name: "{{ users.user3 }}"
     state: present
     create_home: yes
-    password: "{{ password3 | password_hash('sha512') }}"
+    password: "{{ passwords.password3 | password_hash('sha512') }}"
     comment: "{{ users.user3 }}@example.com"
     home: "/home/{{ users.user3 }}"

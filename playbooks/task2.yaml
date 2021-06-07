@@ -1,5 +1,7 @@
 ---
 - hosts: nodes
+  vars_files:
+    - vars/passwords.yaml
   roles:
     - roles/task2
   become: yes
