@@ -1,17 +1,19 @@
 ---
 - name: Install, configure, and start Apache on {{ inventory_hostname }}
-  yum: name=httpd state=latest
+  block:
+    - name: Install Apache on on {{ inventory_hostname }}
+      yum: name=httpd state=latest
 
-- name: Enable httpd.service on {{ inventory_hostname }}
-  service: name=httpd state=started enabled=yes
+    - name: Enable httpd.service on {{ inventory_hostname }}
+      service: name=httpd state=started enabled=yes
 
-- name: Create an index.html
-  template: src=index.j2.html dest=/var/www/html/index.html owner=root group=root mode=0644
-  notify:
-    - reload httpd.service
+    - name: Create an index.html
+      template: src=index.j2.html dest=/var/www/html/index.html owner=root group=root mode=0644
+      notify:
+        - reload httpd.service
 
-- name: Configure Firewall
-  firewalld: port=80/tcp  permanent=yes state=enabled
-  notify:
-    - reload firewall
-when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+    - name: Configure Firewall
+      firewalld: port=80/tcp  permanent=yes state=enabled
+      notify:
+        - reload firewall
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
