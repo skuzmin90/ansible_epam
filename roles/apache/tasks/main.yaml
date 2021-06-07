@@ -17,3 +17,9 @@
       notify:
         - reload firewall
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: Install, configure FTP-server
+  block:
+    - name: Install vsftpd
+      yum: name=vsftpd state=latest
+
