@@ -5,7 +5,7 @@
       yum: name=vsftpd state=latest
 
     - name: Enable sftpd service
-      service: name=vsftpd.service state=enabled
+      service: name=vsftpd.service state=started
 
     - name: Enable ftp port
       firewalld: service=ftp state=enabled permanent=yes
