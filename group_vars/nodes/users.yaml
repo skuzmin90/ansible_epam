@@ -1,5 +1,5 @@
 ---
 users:
-  - user1: 'Alice'
-  - user2: 'Bob'
-  - user3: 'Carol'
+  user1: 'Alice'
+  user2: 'Bob'
+  user3: 'Carol'
