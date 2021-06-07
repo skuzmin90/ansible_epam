@@ -1,6 +1,11 @@
 ---
-- name: Creating new users
-  user: name="{{ item.name }}" state=present password="{{ item.password }}" comment="{{ item.comment }}" home="{{ item.home }}"
-  with_items: "{{ users }}"
+- name: Adding new users on servers
+  block:
+  - name: Creating user {{ item.name }}
+    user: name="{{ item.name }}" state=present password="{{ item.passwords }}" comment="{{ item.comment }}" home="{{ item.home }}"
+
+    with_together:
+      - "{{ users }}"
+      - "{{ passwords }}"
 
 
