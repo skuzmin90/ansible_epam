@@ -1,8 +1,14 @@
 ---
 - name: Creating new users
   user: name={{ item }} state=present comment="{{ item }}@example.com" create_home=yes home="/home/{{ item }}"
-  with_items: [{{ users.name1 }},{{ users.name2 }}, {{ users.name3 }}]
+  with_items:
+    - {{ users.name1 }}
+    - {{ users.name2 }}
+    - {{ users.name3 }}
 
 - name: Creating new users
   user: name={{ item }} state=absent
-  with_items: [{{ users.name1 }},{{ users.name2 }}, {{ users.name3 }}]
+  with_items:
+    - {{ users.name1 }}
+    - {{ users.name2 }}
+    - {{ users.name3 }}
