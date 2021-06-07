@@ -1,10 +1,27 @@
 ---
-- name: Creating new users
+- name: Creating user {{ user1 }}
   user:
-    name: "{{ item.name }}"
+    name: "{{ user1 }}"
     state: present
-    password: "{{ item.password | password_hash('sha512')}}"
-    comment: "{{ item.comment }}"
     create_home: yes
-    home: "{{ item.home }}"
-  with_items: "{{ users }}"
+    password: "{{ password1 | password_hash('sha512') }}"
+    comment: "{{ user1 }}@example.com"
+    home: "/home/{{ user1 }}"
+
+- name: Creating user {{ user2 }}
+  user:
+    name: "{{ user2 }}"
+    state: present
+    create_home: yes
+    password: "{{ password2 | password_hash('sha512') }}"
+    comment: "{{ user2 }}@example.com"
+    home: "/home/{{ user2 }}"
+
+- name: Creating user {{ user3 }}
+  user:
+    name: "{{ user3 }}"
+    state: present
+    create_home: yes
+    password: "{{ password3 | password_hash('sha512') }}"
+    comment: "{{ user3 }}@example.com"
+    home: "/home/{{ user3 }}"
