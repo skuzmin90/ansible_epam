@@ -1,10 +1,10 @@
 ---
-- name: Install, configure, and start Apache on {{ inventory_hostname }}
+- name: Install, configure, and start Apache on {{ ansible_distribution }}
   block:
-    - name: Install Apache on on {{ inventory_hostname }}
+    - name: Install Apache
       yum: name=httpd state=latest
 
-    - name: Enable httpd.service on {{ inventory_hostname }}
+    - name: Enable httpd.service
       service: name=httpd state=started enabled=yes
 
     - name: Create an index.html
