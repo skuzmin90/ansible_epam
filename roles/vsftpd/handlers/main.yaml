@@ -1,0 +1,6 @@
+---
+- name: reload firewalld
+  service: name=firewalld.service state=reloaded
+
+- name: reload vsftpd
+  service: name=vsftpd.service state=reloaded

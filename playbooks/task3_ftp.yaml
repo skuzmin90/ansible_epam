@@ -1,0 +1,5 @@
+---
+- hosts: nodes
+  roles:
+    - 'roles/vsftpd'
+  become: yes

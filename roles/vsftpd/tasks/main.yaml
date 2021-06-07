@@ -1,0 +1,25 @@
+---
+- name: Install, enable and configure sftpd
+  block:
+    - name: Install sftpd
+      yum: name=sftpd state=latest
+
+    - name: Enable sftpd service
+      service: name=vsftpd.service state=enabled
+
+    - name: Enable ftp port
+      firewalld: name=sftpd service=ftp state=enabled permanent=yes
+      notify:
+        - reload firewalld
+
+    - name: Set selinux boolean param
+      seboolean: name="{{ item.key }}" state="{{ item.value }}" persistent=yes
+      with_items: "{{ vsftpd_seboolean }}"
+
+    - name: Editing vsftpd.conf file
+      template: src=vsftpd.conf.j2 dest="{{ vsftpd.config_path }}" mode=0644 owner=root
+      notify:
+        - reload vsftpd
+
+    - name: Create directory
+      file: path="{{ dir_path }}" state=directory mode=0644 owner=root
