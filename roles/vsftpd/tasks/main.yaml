@@ -1,14 +1,14 @@
 ---
 - name: Install, enable and configure sftpd
   block:
-    - name: Install sftpd
-      yum: name=sftpd state=latest
+    - name: Install vsftpd
+      yum: name=vsftpd state=latest
 
     - name: Enable sftpd service
       service: name=vsftpd.service state=enabled
 
     - name: Enable ftp port
-      firewalld: name=sftpd service=ftp state=enabled permanent=yes
+      firewalld: service=ftp state=enabled permanent=yes
       notify:
         - reload firewalld
 
@@ -22,4 +22,4 @@
         - reload vsftpd
 
     - name: Create directory
-      file: path="{{ dir_path }}" state=directory mode=0644 owner=root
+      file: path="{{ vsftpd.dir_path }}" state=directory mode=0644 owner=root
