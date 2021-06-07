@@ -1,3 +1,6 @@
 ---
 users:
-  name: ["Alice", "Bob", "Carol"]
+  name:
+    - Alice
+    - Bob
+    - Carol
