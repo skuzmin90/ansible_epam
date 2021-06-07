@@ -1,5 +1,5 @@
 ---
 users:
-  user1: 'Alice'
-  user2: 'Bob'
-  user3: 'Carol'
+  - { name: 'Alice', password: 'Alice', comment: 'Alice@example.com', home: '/home/Alice' }
+  - { name: 'Bob', password: 'Bob', comment: 'Bob@example.com', home: '/home/Bob' }
+  - { name: 'Carol', password: 'Carol', comment: 'Carol@example.com', home: '/home/Carol' }
