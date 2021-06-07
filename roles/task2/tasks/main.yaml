@@ -1,4 +1,8 @@
 ---
 - name: Creating new users on {{ inventory_hostname }}
-  user: name={{ item }} comment="{{ item }}@example.com" create_home=yes home="/home/{{ item }}"
+  user: name={{ item }} state=present comment="{{ item }}@example.com" create_home=yes home="/home/{{ item }}"
   with_items: ["Alice", "Bob", "Carol"]
+
+- name: Creating new users on {{ inventory_hostname }}
+  user: name={{ item }} state=absent
+  with_items: [ "Alice", "Bob", "Carol" ]
