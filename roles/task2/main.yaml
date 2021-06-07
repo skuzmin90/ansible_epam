@@ -1,5 +1,4 @@
 ---
-- name:
-  user:
+- user:
     name: "{{ users.user1 }}"
     state: present
