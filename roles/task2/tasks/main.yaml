@@ -3,7 +3,7 @@
   user:
     name: "{{ item.name }}"
     state: present
-    password: "{{ item.password }}"
+    password: "{{ item.password | password_hash('sha512')}}"
     comment: "{{ item.comment }}"
     create_home: yes
     home: "{{ item.home }}"
