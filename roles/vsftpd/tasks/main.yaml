@@ -1,10 +1,10 @@
 ---
-- name: Install, enable and configure sftpd
+- name: Install, enable and configure vsftpd
   block:
     - name: Install vsftpd
       yum: name=vsftpd state=latest
 
-    - name: Enable sftpd service
+    - name: Enable vsftpd service
       service: name=vsftpd.service state=started
 
     - name: Enable ftp port
