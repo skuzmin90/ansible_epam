@@ -8,4 +8,4 @@ config_path: "/etc/vsftpd/vsftpd.conf"
 dir_path: "/var/ftp/pub/uploads"
 
 vsftpd_seboolean:
-  ftpd_anon_write: "yes"
+  ftpd_anon_write: 'yes'
