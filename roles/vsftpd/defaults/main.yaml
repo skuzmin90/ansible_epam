@@ -5,7 +5,7 @@ local_enable: "YES"
 anon_upload_enable: "YES"
 listen: "YES"
 config_path: "/etc/vsftpd/vsftpd.conf"
-dir_path: "/var/ftp/pub"
+dir_path: "/var/ftp/pub/uploads"
 
 vsftpd_seboolean:
   ftpd_anon_write: yes
