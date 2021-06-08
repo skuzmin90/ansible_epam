@@ -12,14 +12,15 @@
       notify:
         - reload firewalld
 
-    - name: Set selinux boolean param
-      seboolean: name="{{ item.key }}" state="{{ item.value }}" persistent=yes
-      with_dict: "{{ vsftpd_seboolean }}"
+    - name: Create directory
+      file: path="{{ dir_path }}" state=directory mode=0755 owner=root
 
     - name: Editing vsftpd.conf file
-      template: src=vsftpd.conf.j2 dest="{{ vsftpd.config_path }}" mode=0644 owner=root
+      template: src="vsftpd.conf.j2" dest="{{ config_path }}" mode=0644 owner=root
       notify:
         - reload vsftpd
 
-    - name: Create directory
-      file: path="{{ vsftpd.dir_path }}" state=directory mode=0644 owner=root
+    - name: Set selinux boolean param
+      seboolean: name="{{ item.key }}" state="{{ item.value }}" persistent=yes
+      with_dict: "{{ vsftpd_seboolean }}"
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
