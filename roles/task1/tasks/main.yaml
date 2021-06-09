@@ -24,9 +24,6 @@
   - name: Remove Apache from a Web-server
     yum: name=httpd state=absent
 
-  - name: Deleting a Apache Web-server package
-    package: name=httpd state=absent
-
   - name: Deleting a file
     file: path=/var/www/html/index.html state=absent
 
