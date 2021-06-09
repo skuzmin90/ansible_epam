@@ -13,6 +13,6 @@ pub_path: "/var/ftp/pub"
 allow_writeable_chroot: "YES"
 
 vsftpd_seboolean:
-  ftp_home_dir: yes
+  ftpd_home_dir: yes
 
 vsftpd_seboolean: {}
