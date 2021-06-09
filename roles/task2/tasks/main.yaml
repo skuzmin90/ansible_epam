@@ -1,5 +1,5 @@
 ---
-- name: Creating user {{ item[0] }}
+- name: Creating users {{ users }}
   user:
     name: "{{ item[0] }}"
     state: present
