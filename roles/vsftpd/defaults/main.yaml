@@ -13,6 +13,4 @@ pub_path: "/var/ftp/pub"
 allow_writeable_chroot: "YES"
 
 vsftpd_seboolean:
-  ftpd_home_dir: yes
-
-vsftpd_seboolean: {}
+  ftpd_anon_write: yes
