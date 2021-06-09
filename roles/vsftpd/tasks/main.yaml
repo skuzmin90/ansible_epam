@@ -29,7 +29,6 @@
       seboolean:
         name: "{{ item.key }}"
         state: "{{ item.value }}"
-        persistent: yes
       with_dict: "{{ vsftpd_seboolean }}"
 
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
