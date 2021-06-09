@@ -20,6 +20,11 @@
       notify:
         - reload vsftpd
 
+    - name: Put SELinux in permissive mode, logging actions that would be blocked.
+      selinux:
+        policy: targeted
+        state: permissive
+
     - name: Set selinux boolean param
       seboolean: name=ftpd_anon_write state=yes persistent=yes ignore_selinux_state=yes
       #with_dict: "{{ vsftpd_seboolean }}"
