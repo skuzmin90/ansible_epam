@@ -7,7 +7,7 @@
     password: "{{ item[1] | password_hash('sha512') }}"
     comment: "{{ item[0] }}@example.com"
     home: "/home/{{ item[0] }}"
-  with_nested:
+  with_together:
     - "{{ users }}"
     - "{{ passwords }}"
 #
