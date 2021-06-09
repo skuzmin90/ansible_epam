@@ -25,6 +25,7 @@
         name: "{{ item.key }}"
         state: "{{ item.value }}"
         persistent: yes
+        ignore_selinux_state: yes
       with_dict: "{{ vsftpd_seboolean }}"
 
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
