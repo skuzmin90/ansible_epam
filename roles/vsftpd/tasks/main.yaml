@@ -13,7 +13,7 @@
         - reload firewalld
 
     - name: Create directory
-      file: path="{{ dir_path }}" state=directory mode=0755 owner=root
+      file: path="{{ dir_path }}" state=directory mode=0777 owner=root
 
     - name: Editing vsftpd.conf file
       template: src="vsftpd.conf.j2" dest="{{ config_path }}" mode=0644 owner=root
@@ -21,10 +21,7 @@
         - reload vsftpd
 
     - name: Set selinux boolean param
-      seboolean: name={{ item.key }} state={{ item.value }} persistent=yes
-      with_dict: "{{ vsftpd_seboolean }}"
-
-    - name: Create ftp user
-      user: name=ftp-user state=present shell=/sbin/nologin
+      seboolean: name=ftpd_anon_write state=yes persistent=yes
+      #with_dict: "{{ vsftpd_seboolean }}"
 
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
