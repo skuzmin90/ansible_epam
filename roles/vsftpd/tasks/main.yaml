@@ -22,6 +22,7 @@
 
     - name: Disable SELinux
       selinux:
+        policy: targeted
         state:  permissive
 
     - name: Setting SELinux booleans
