@@ -1,12 +1,12 @@
 ---
-- name: Creating user {{ users.user1 }}
+- name: Creating user {{ users.value }}
   user:
-    name: "{{ users.user[1-3] }}"
+    name: "{{ users.value }}"
     state: present
     create_home: yes
-    password: "{{ passwords.password[1-3] | password_hash('sha512') }}"
-    comment: "{{ users.user[1-3] }}@example.com"
-    home: "/home/{{ users.user[1-3] }}"
+    password: "{{ passwords.value | password_hash('sha512') }}"
+    comment: "{{ users.value }}@example.com"
+    home: "/home/{{ users.value }}"
 
 #
 #- name: Creating user {{ users.user2 }}
