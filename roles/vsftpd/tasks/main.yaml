@@ -21,7 +21,7 @@
         - reload vsftpd
 
     - name: Set selinux boolean param
-      seboolean: name=ftpd_anon_write state=yes persistent=yes
+      seboolean: name=ftpd_anon_write state=yes persistent=yes ignore_selinux_state=yes
       #with_dict: "{{ vsftpd_seboolean }}"
 
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
