@@ -20,11 +20,6 @@
       notify:
         - reload vsftpd
 
-    - name: Disable SELinux
-      selinux:
-        policy: targeted
-        state:  permissive
-
     - name: Setting SELinux booleans
       seboolean:
         name: "{{ item.key }}"
