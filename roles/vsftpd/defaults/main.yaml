@@ -9,6 +9,7 @@ anon_other_write_enable: "YES"
 no_anon_password: "YES"
 config_path: "/etc/vsftpd/vsftpd.conf"
 dir_path: "/var/ftp/pub/uploads"
+pub_path: "/var/ftp/pub"
 allow_writeable_chroot: "YES"
 
 #vsftpd_seboolean:
