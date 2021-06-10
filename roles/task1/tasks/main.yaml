@@ -56,14 +56,25 @@
       register: grub_cmdline_check_biosdevname
       changed_when: false
 
-    - name: Insert param in grub config
+    - name: Insert net.ifnames param in grub config
       lineinfile:
         backrefs: yes
         path: /etc/default/grub
         state: present
         regexp: '^(GRUB_CMDLINE_LINUX=\".*)\"$'
-        line: '\1 net.ifnames=0 biosdevname=0"'
-      when: grub_cmdline_check_netifnames.found == 0 and grub_cmdline_check_biosdevname.found == 0
+        line: '\1 net.ifnames=0"'
+      when: grub_cmdline_check_netifnames.found == 0
+      notify:
+        - reconfigure grub
+
+    - name: Insert biosdevname param in grub config
+      lineinfile:
+        backrefs: yes
+        path: /etc/default/grub
+        state: present
+        regexp: '^(GRUB_CMDLINE_LINUX=\".*)\"$'
+        line: '\1 biosdevname=0"'
+      when: grub_cmdline_check_biosdevname.found == 0
       notify:
         - reconfigure grub
   tags:
