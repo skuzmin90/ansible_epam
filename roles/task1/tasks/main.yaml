@@ -39,22 +39,20 @@
     - name: Check if parametrs already in grub config
       lineinfile:
         path: /etc/default/grub
-        regexp: '^GRUB_CMDLINE_LINUX=".*({{ item }}){1}'
+        regexp: '^GRUB_CMDLINE_LINUX=".*(net.ifnames=\d+){1}'
         backup: yes
         state: absent
       check_mode: true
       register: grub_cmdline_check
-      loop: ['net.ifnames=0', 'biosdevname=0']
       changed_when: false
 
-    - name: Insert {{ grub }} in grub config
+    - name: Insert param in grub config
       lineinfile:
         backrefs: yes
         path: /etc/default/grub
         state: present
         regexp: '^(GRUB_CMDLINE_LINUX=\".*)\"$'
-        line: '\1 {{ item }}"'
-      loop: ['net.ifnames=0', 'biosdevname=0']
+        line: '\1 net.ifnames=0"'
       when: grub_cmdline_check.found == 0
       notify:
         - reconfigure grub
