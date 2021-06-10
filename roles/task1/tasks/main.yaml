@@ -36,12 +36,13 @@
 
 - name: Configure grub with new params
   block:
-    - name: Check if parametrs already in grub config
+    - name: Check if params already in grub config
       lineinfile:
         path: /etc/default/grub
-        regexp: '^GRUB_CMDLINE_LINUX=".*(net.ifnames=\d+){1}'
+        regexp: '^GRUB_CMDLINE_LINUX=".*({{ item }}[=]\d+){1}'
         backup: yes
         state: absent
+      with_items: ['net.ifnames', 'biosdevname']
       check_mode: true
       register: grub_cmdline_check
       changed_when: false
@@ -52,7 +53,8 @@
         path: /etc/default/grub
         state: present
         regexp: '^(GRUB_CMDLINE_LINUX=\".*)\"$'
-        line: '\1 net.ifnames=0"'
+        line: '\1 {{ item }}"'
+      with_items: ['net.ifnames=0', 'biosdevname=0']
       when: grub_cmdline_check.found == 0
       notify:
         - reconfigure grub
