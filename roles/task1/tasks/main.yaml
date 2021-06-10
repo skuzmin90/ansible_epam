@@ -56,7 +56,7 @@
         line: '\1 {{ item }}"'
       loop: ['net.ifnames=0', 'biosdevname=0']
       when: grub_cmdline_check.found == 0
-  notify:
-    - reconfigure grub
+      notify:
+        - reconfigure grub
   tags:
     - configure_grub
