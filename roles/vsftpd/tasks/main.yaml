@@ -19,11 +19,20 @@
       template: src="vsftpd.conf.j2" dest="{{ config_path }}" mode=0644 owner=root
       notify:
         - reload vsftpd
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
+  tags:
+    - install_vsftpd
+
+- name: Configure SELinux properties
+  block:
+    - name: Install requirements are needed on the host
+      yum: name={{ item }} state=latest
+      loop: ['libselinux-python', 'libsemanage-python']
 
     - name: Setting SELinux booleans
       seboolean:
         name: "{{ item.key }}"
         state: "{{ item.value }}"
+        persistent: yes
       with_dict: "{{ vsftpd_seboolean }}"
-
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
