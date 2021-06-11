@@ -27,7 +27,7 @@
   block:
     - name: Install requirements are needed on the host
       yum: name={{ item }} state=latest
-      loop: ['python3-libselinux', 'python3-libsemanage']
+      loop: ['python3-libselinux', 'python3-libsemanage', 'policycoreutils-python-utils']
 
     - name: Setting SELinux booleans
       seboolean:
