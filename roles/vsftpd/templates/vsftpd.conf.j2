@@ -7,10 +7,8 @@ anon_upload_enable={{ anon_upload_enable }}
 listen={{ listen }}
 no_anon_password={{ no_anon_password }}
 anon_root={{ pub_path }}
-allow_writeable_chroot={{ allow_writeable_chroot }}
 anon_mkdir_write_enable={{ anon_mkdir_write_enable }}
 anon_other_write_enable={{ anon_other_write_enable }}
-allow_writeable_chroot={{ allow_writeable_chroot }}
 
 local_umask=022
 dirmessage_enable=YES
@@ -18,6 +16,3 @@ xferlog_enable=YES
 connect_from_port_20=YES
 xferlog_std_format=YES
 pam_service_name=vsftpd
-userlist_enable=YES
-chown_uploads=YES
-chroot_local_user=YES
