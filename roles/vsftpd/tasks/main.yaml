@@ -27,7 +27,7 @@
   block:
     - name: Install requirements are needed on the host
       yum: name={{ item }} state=latest
-      with_items: ['python3-libselinux', 'python3-libsemanage', 'policycoreutils-python-utils']
+      loop: ['python3-libselinux', 'python3-libsemanage', 'policycoreutils-python-utils']
 
     - name: Set SELinux context for {{ pub_path }} and {{ dir_path }}
       sefcontext: target='{{ item.target }}' setype="{{ item.setype }}" reload=True state=present
