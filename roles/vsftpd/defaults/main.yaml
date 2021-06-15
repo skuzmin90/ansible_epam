@@ -1,7 +1,7 @@
 ---
 anonymous_enable: "YES"
 write_enable: "YES"
-local_enable: "YES"
+local_enable: "NO"
 anon_upload_enable: "YES"
 listen: "YES"
 anon_mkdir_write_enable: "YES"
