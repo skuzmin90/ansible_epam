@@ -4,3 +4,9 @@
 
 - name: reload vsftpd
   service: name=vsftpd.service state=restarted
+
+- name: restorecon
+  shell: restorecon -R -v {{ item }}
+  with_items:
+    - '{{ pub_path }}'
+    - '{{ dir_path }}'

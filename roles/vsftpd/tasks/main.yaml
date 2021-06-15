@@ -8,7 +8,7 @@
       service: name=vsftpd.service state=started enabled=yes
 
     - name: Enable ftp port
-      firewalld: service=ftp state=enabled permanent=yes
+      firewalld: port=20-21/tcp state=enabled permanent=yes
       notify:
         - reload firewalld
 
@@ -27,7 +27,14 @@
   block:
     - name: Install requirements are needed on the host
       yum: name={{ item }} state=latest
-      loop: ['python3-libselinux', 'python3-libsemanage', 'policycoreutils-python-utils']
+      with_items: ['python3-libselinux', 'python3-libsemanage', 'policycoreutils-python-utils']
+
+    - name: Set SELinux context for {{ pub_path }} and {{ dir_path }}
+      sefcontext: target='{{ item.target }}' setype="{{ item.setype }}" reload=True state=present
+      with_items:
+        - { target: '{{ pub_path }}', setype: 'public_content_t' }
+        - { target: '{{ dir_path }}', setype: 'public_content_rw_t' }
+      notify: restorecon
 
     - name: Setting SELinux booleans
       seboolean:
